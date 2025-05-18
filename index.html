@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>With Love, for Mom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Playfair Display', serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #8B0000, #B22222);
+      overflow-x: hidden;
+      position: relative;
+      min-height: 200vh;
+      color: #fff;
+    }
+
+    .floating-hearts {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 10s linear infinite;
+      opacity: 0.6;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -15px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -15px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+      }
+    }
+
+    .message-section {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      margin-top: 120vh;
+    }
+
+    .envelope {
+      display: inline-block;
+      width: 250px;
+      height: 150px;
+      background: white;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+
+    .envelope::before {
+      content: 'For Capt. Richa';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.3rem;
+      color: #8B0000;
+      font-weight: bold;
+    }
+
+    .letter {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 80%;
+      max-width: 400px;
+      height: auto;
+      background: #fff0f0;
+      border-radius: 12px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+      transform: translate(-50%, -50%) scale(0);
+      z-index: 10;
+      padding: 30px;
+      text-align: center;
+      color: #8B0000;
+      animation: flyin 0.6s ease-out forwards;
+    }
+
+    .letter h2 {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    .letter p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    @keyframes flyin {
+      0% {
+        transform: translate(-50%, -150%) scale(0.3);
+        opacity: 0;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-hearts" id="hearts-container"></div>
+
+  <div class="message-section">
+    <div class="envelope" onclick="showLetter()"></div>
+  </div>
+
+  <div class="letter" id="letter">
+    <h2>Dear Mom,</h2>
+    <p>
+      This is a small website, made with all my love, just to show how much you mean to me. You're the heart of our home,
+      and everything you do fills my life with joy. ❤️
+    </p>
+    <p>Love you forever,<br>Your Child</p>
+  </div>
+
+  <script>
+    // Create floating hearts
+    const heartsContainer = document.getElementById('hearts-container');
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 8 + Math.random() * 5 + 's';
+      heartsContainer.appendChild(heart);
+    }
+
+    // Show letter animation
+    function showLetter() {
+      const letter = document.getElementById('letter');
+      letter.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
